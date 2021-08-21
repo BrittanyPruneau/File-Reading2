@@ -1,0 +1,39 @@
+package fileReading;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
+public class FileIO
+{
+	public static void main(String[] args)
+	{
+		/*
+		 * We want to make sure to release the file resources. 
+		 * Interface AutoCloseable does this for us. 
+		 * 
+		 */
+		
+		String fileName = "src/fileReading/Resources/Demo.txt";
+		String fileName2 = "src/fileReading/Resources/Demo2.txt";
+		
+		try(Scanner reader = new Scanner(new File(fileName));
+		PrintWriter writer = new PrintWriter(fileName2))
+						{
+			while(reader.hasNext())
+			{
+				String line = reader.nextLine();
+				System.out.println(line.toUpperCase());
+				//writer.println(line.toLowerCase());
+
+			}
+			
+		} catch (FileNotFoundException e)
+		{
+			System.out.println("fileName + " + "could not be found.");
+			e.printStackTrace();
+		}
+	}
+
+}
